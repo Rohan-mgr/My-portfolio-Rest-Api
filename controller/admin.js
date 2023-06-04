@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const path = require("path");
 const Admin = require("../Model/admin");
 const Project = require("../Model/project");
 const Message = require("../Model/message");
@@ -98,7 +97,7 @@ exports.handlePasswordReset = async (req, res, next) => {
       _id: adminId,
       passwordResetToken: token,
     });
-    const verifyToken = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
+    const verifyToken = await jwt.verify(token, process.env.JWT_TOKEN_SECRET);
 
     if (!existingAdmin || !verifyToken.Id) {
       const error = new Error("Token is not valid!");
@@ -109,7 +108,7 @@ exports.handlePasswordReset = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(newPassword, 12);
     existingAdmin.password = hashedPassword;
 
-    const result = existingAdmin.save();
+    const result = await existingAdmin.save();
 
     res
       .status(200)
@@ -118,7 +117,6 @@ exports.handlePasswordReset = async (req, res, next) => {
     if (error instanceof mongoose.Error.CastError) {
       console.log("mongoose error");
       error.message = "mongoose error";
-      // throw new Error("Invalid UserId!");
     }
     if (!error.statusCode) {
       error.statusCode = 500;
@@ -134,16 +132,10 @@ exports.handlePasswordReset = async (req, res, next) => {
 };
 
 exports.createAdmin = async (req, res, next) => {
-  //   const errors = validationResult(req);
   const fullName = req.body.fullName;
   const email = req.body.email;
   const pass = req.body.password;
   let dupUser;
-  //   if (!errors.isEmpty()) {
-  //     const error = new Error("Validation failed!");
-  //     error.statusCode = 422;
-  //     throw error;
-  //   }
   try {
     dupUser = await Admin.findOne({ email: email });
     if (dupUser) {
