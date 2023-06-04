@@ -41,17 +41,17 @@ app.use(
 
 app.use("/admin", adminRoutes);
 
+app.get("*", (req, res, next) => {
+  res.status(200).json({
+    message: "bad request",
+  });
+});
+
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message;
   console.log(message, error.statusCode, "message");
   res.status(status).send({ message: message, status: error.statusCode });
-});
-
-app.get("*", (req, res, next) => {
-  res.status(200).json({
-    message: "bad request",
-  });
 });
 
 mongoose
