@@ -58,7 +58,7 @@ console.log(process.env.MONGODB_CONNECTION_STRING);
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING)
   .then((success) => {
-    app.listen(8000);
+    app.listen(process.env.PORT || 8000);
     console.log("Database connection successfull.");
   })
   .catch((err) => {
