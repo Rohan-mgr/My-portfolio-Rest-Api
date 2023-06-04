@@ -61,5 +61,6 @@ mongoose
     console.log("Database connection successfull.");
   })
   .catch((err) => {
-    throw new Error("Database connection failed.");
+    console.error("Database connection failed:", err);
+    process.exit(1); // Exit the process if the database connection fails
   });
