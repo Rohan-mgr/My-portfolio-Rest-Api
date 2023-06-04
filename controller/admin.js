@@ -97,7 +97,7 @@ exports.handlePasswordReset = async (req, res, next) => {
       _id: adminId,
       passwordResetToken: token,
     });
-    const verifyToken = await jwt.verify(token, process.env.JWT_TOKEN_SECRET);
+    const verifyToken = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
 
     if (!existingAdmin || !verifyToken.Id) {
       const error = new Error("Token is not valid!");
@@ -108,7 +108,7 @@ exports.handlePasswordReset = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(newPassword, 12);
     existingAdmin.password = hashedPassword;
 
-    const result = await existingAdmin.save();
+    await existingAdmin.save();
 
     res
       .status(200)
@@ -150,7 +150,6 @@ exports.createAdmin = async (req, res, next) => {
       password: hashedPassword,
     });
     const result = await admin.save();
-    console.log(result, "result");
     res
       .status(200)
       .json({ message: "Admin created successfully", userId: result._id });
