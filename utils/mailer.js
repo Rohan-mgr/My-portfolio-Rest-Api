@@ -23,7 +23,7 @@ const sendEmail = ({ admin, resetToken }) => {
         <p>Click this <a href="https://my-portfolio-react-ui-ten.vercel.app/new-password/${
           admin._id
         }/${resetToken}" target="_self">Link</a> to set a new password</p>
-        <p>This link only valid for 2 minutes</p>
+        <p>This link only valid for 1 day.</p>
       </div>`,
       attachments: [
         {

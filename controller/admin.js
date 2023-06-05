@@ -63,7 +63,7 @@ exports.GetPasswordReset = async (req, res, next) => {
         Id: admin._id.toString(),
       },
       process.env.JWT_TOKEN_SECRET,
-      { expiresIn: "120s" }
+      { expiresIn: "1d" }
     );
     admin.passwordResetToken = resetToken;
     const result = await admin.save();
