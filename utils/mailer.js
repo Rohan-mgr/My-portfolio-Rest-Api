@@ -9,8 +9,8 @@ const mailer = nodemailer.createTransport(
   })
 );
 
-const sendEmail = ({ admin, resetToken }) => {
-  mailer.sendMail(
+const sendEmail = async ({ admin, resetToken }) => {
+  await mailer.sendMail(
     {
       to: admin?.email,
       from: "rohan.magar.415@gmail.com",
@@ -38,7 +38,7 @@ const sendEmail = ({ admin, resetToken }) => {
         console.log(err);
         throw err;
       }
-      // console.log(res);
+      console.log(res, "mail");
     }
   );
 };

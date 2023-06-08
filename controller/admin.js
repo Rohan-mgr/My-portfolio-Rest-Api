@@ -50,6 +50,7 @@ exports.adminLogin = async (req, res, next) => {
 
 exports.GetPasswordReset = async (req, res, next) => {
   const email = req.body.email;
+  console.log("password reset route called");
   try {
     const admin = await Admin.findOne({ email: email });
     if (!admin) {
@@ -67,7 +68,7 @@ exports.GetPasswordReset = async (req, res, next) => {
     );
     admin.passwordResetToken = resetToken;
     const result = await admin.save();
-    sendEmail({
+    await sendEmail({
       admin,
       resetToken,
     });
