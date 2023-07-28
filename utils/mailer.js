@@ -22,7 +22,7 @@ const sendEmail = async ({ admin, resetToken }) => {
   await mailer.sendMail(
     {
       to: admin?.email,
-      from: process.env.NODEMAILER_USERNAME,
+      from: "rohanmag@rohanmagar.com",
       fromname: "Rohan Rana Magar",
       subject: "Password Reset",
       html: `<div style="text-align: center;">
