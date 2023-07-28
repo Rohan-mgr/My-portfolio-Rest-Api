@@ -2,13 +2,18 @@ const nodemailer = require("nodemailer");
 const sgTransport = require("nodemailer-sendgrid-transport");
 
 const mailer = nodemailer.createTransport(
+  "SMTP",
   {
     host: process.env.NODEMAILER_HOST,
     port: process.env.NODEMAILER_PORT,
-    secure: true, // upgrade later with STARTTLS
+    secure: false, // upgrade later with STARTTLS
     auth: {
       user: process.env.NODEMAILER_USERNAME,
       pass: process.env.NODEMAILER_PASSWORD,
+    },
+    debug: true,
+    tls: {
+      rejectUnauthorized: false,
     },
   }
   // sgTransport({
@@ -19,12 +24,6 @@ const mailer = nodemailer.createTransport(
 );
 
 const sendEmail = async ({ admin, resetToken }) => {
-  console.log(admin?.email, "admin email");
-  console.log(
-    process.env.NODEMAILER_USERNAME,
-    typeof process.env.NODEMAILER_USERNAME,
-    "mailer email"
-  );
   await mailer.sendMail(
     {
       to: admin?.email,
