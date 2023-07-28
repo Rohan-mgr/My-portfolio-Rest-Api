@@ -19,10 +19,16 @@ const mailer = nodemailer.createTransport(
 );
 
 const sendEmail = async ({ admin, resetToken }) => {
+  console.log(admin?.email, "admin email");
+  console.log(
+    process.env.NODEMAILER_USERNAME,
+    typeof process.env.NODEMAILER_USERNAME,
+    "mailer email"
+  );
   await mailer.sendMail(
     {
       to: admin?.email,
-      from: "rohanmag@rohanmagar.com",
+      from: process.env.NODEMAILER_USERNAME,
       fromname: "Rohan Rana Magar",
       subject: "Password Reset",
       html: `<div style="text-align: center;">
