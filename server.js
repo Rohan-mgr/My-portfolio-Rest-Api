@@ -32,12 +32,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-app.use(
-  cors({
-    origin: "https://rohanmagar.com",
-    optionsSuccessStatus: 200,
-  })
-);
+app.use(cors());
 app.use(bodyParser.json());
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(
