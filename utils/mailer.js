@@ -3,14 +3,11 @@ const nodemailer = require("nodemailer");
 const mailer = nodemailer.createTransport({
   host: process.env.NODEMAILER_HOST,
   port: process.env.NODEMAILER_PORT,
+  service: "gmail",
   secure: false,
   auth: {
     user: process.env.NODEMAILER_USERNAME,
     pass: process.env.NODEMAILER_PASSWORD,
-  },
-  debug: true,
-  tls: {
-    rejectUnauthorized: false,
   },
 });
 
@@ -18,8 +15,7 @@ const sendEmail = async ({ admin, resetToken }) => {
   await mailer.sendMail(
     {
       to: admin?.email,
-      from: process.env.NODEMAILER_USERNAME,
-      fromname: "Rohan Rana Magar",
+      from: `"My Portfolio" <${process.env.NODEMAILER_USERNAME}>`,
       subject: "Password Reset",
       html: `<div style="text-align: center;">
       <img style="width: 150px; " src="cid:my_logo"/>
