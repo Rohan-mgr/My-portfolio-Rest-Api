@@ -33,7 +33,7 @@ const fileFilter = (req, file, cb) => {
 };
 
 var corsOptions = {
-  origin: 'https://rohanmagar.com.np',
+  origin: 'https://www.rohanmagar.com.np',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
