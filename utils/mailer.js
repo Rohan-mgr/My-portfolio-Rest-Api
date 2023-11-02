@@ -49,7 +49,7 @@ const sendEmail = async ({ admin, resetToken }) => {
       <img style="width: 150px; " src="cid:my_logo"/>
         <h2>Greeting, ${admin?.fullName || ""}</h2>
         <p>You requested a password reset</p>
-        <p>Click this <a href="http://localhost:3000/new-password/${
+        <p>Click this <a href="https://rohanmagar.com.np/new-password/${
           admin._id
         }/${resetToken}" target="_self">Link</a> to set a new password</p>
         <p>This link only valid for 1 day.</p>
