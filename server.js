@@ -53,7 +53,6 @@ app.use((error, req, res, next) => {
   console.log(message, error.statusCode, "message");
   res.status(status).send({ message: message, status: error.statusCode });
 });
-console.log(process.env.MONGODB_CONNECTION_STRING);
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING)
